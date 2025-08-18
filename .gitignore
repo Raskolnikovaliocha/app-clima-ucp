@@ -1,0 +1,16 @@
+# Arquivo de credenciais do Google - NUNCA ENVIAR!
+google_credentials.json
+
+# Pasta do ambiente virtual
+.venv/
+*.venv/
+
+# Arquivos temporários do Python
+__pycache__/
+*.pyc
+
+# Arquivos de IDEs (ex: VS Code, PyCharm)
+.vscode/
+.idea/
+
+.devcontainer/  # <-- ADICIONE ESTA LINHA
