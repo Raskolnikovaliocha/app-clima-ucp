@@ -1,6 +1,6 @@
 import math
 
-
+import json
 import gspread
 import streamlit as st
 import requests
@@ -19,18 +19,26 @@ CREDS_FILE = 'google_credentials.json'# Nome do credentials google api
 SHEET_NAME = 'dadosclimaticos2'# Nome da planilha online de dados brutos
 
 # --- Funções ---
+# NOVA FUNÇÃO (para colar no lugar da antiga)
+import json # Garanta que 'import json' está no topo do seu script
+
 @st.cache_resource
 def connect_to_sheet():
-    """Conecta-se ao Google Sheets usando o método de autenticação moderno."""
+    """Conecta-se usando o segredo de linha única ou arquivo local."""
     try:
-        gc = gspread.service_account(filename=CREDS_FILE)
+        # Tenta ler o segredo de linha única do Streamlit Cloud
+        creds_json_str = st.secrets["gspread"]["service_account_info"]
+        creds_dict = json.loads(creds_json_str)
+        gc = gspread.service_account_from_dict(creds_dict)
         return gc
-    except FileNotFoundError:
-        st.error(f"Arquivo de credenciais não encontrado: '{CREDS_FILE}'.")
-        return None
-    except Exception as e:
-        st.error(f"Erro de autenticação: {e}")
-        return None
+    except (KeyError, FileNotFoundError):
+        # Se falhar, tenta usar o arquivo local (para rodar no seu PC)
+        try:
+            gc = gspread.service_account(filename=CREDS_FILE)
+            return gc
+        except Exception as e:
+            st.error(f"Falha na conexão local: {e}")
+            return None
 
 # Adicionamos um _ (underline) no gc para evitar conflito com variáveis globais
 # E cacheamos os dados por 60 segundos para evitar múltiplas leituras
