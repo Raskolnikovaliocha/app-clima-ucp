@@ -6,6 +6,8 @@ import streamlit as st
 import requests
 from datetime import datetime
 from datetime import date
+from datetime import  timezone
+from zoneinfo import ZoneInfo
 import pandas as pd
 import os
 import plotly.express as px
@@ -108,7 +110,12 @@ with tab1:
         cidade = dados["name"]
         coordenada = dados["coord"]["lon"]
         coordenada2 = dados["coord"]["lat"]
-        horario = datetime.now().strftime("%Y-%m-%d %H:%M:%S")# em segundos
+        # --- NOVO BLOCO DE CÓDIGO PARA HORA CORRETA ---
+        agora_utc = datetime.now(timezone.utc)
+        fuso_horario_brasil = ZoneInfo("America/Sao_Paulo")
+        agora_brasil = agora_utc.astimezone(fuso_horario_brasil)
+        horario = agora_brasil.strftime("%Y-%m-%d %H:%M:%S")
+        # --- FIM DO NOVO BLOCO ---
 
         # Conversão para horário local
         sunrise_local = datetime.utcfromtimestamp(sunrise_utc + timezone_offset).strftime("%H:%M:%S")
