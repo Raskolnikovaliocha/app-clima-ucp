@@ -287,7 +287,7 @@ with tab2:
 
         #Essa parte é a  análise descritiva resumidas em gráfico
 
-        fig_resumoT = px.line(resumo_final, x='data', y=['temperatura_media', 'temperatura_maxima','temperatura_minima' ], title='Temperatura média por data')
+        fig_resumoT = px.line(resumo_final, x='data', y=['temperatura_media', 'temperatura_maxima','temperatura_minima', 'amplitude_termica' ], title='Temperatura média por data')
         fig_resumoT.update_layout(
             yaxis_title='Temperatura média (°C)',
             xaxis_title_text='Tempo (dias)',
