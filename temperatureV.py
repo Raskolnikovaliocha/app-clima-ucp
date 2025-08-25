@@ -79,6 +79,7 @@ def append_row_to_sheet(gc, sheet_name, df_row):
 # Aqui começa o processo de pegar os dados no weather api
 #st.write("Python em uso:", sys.executable)
 st.header('Aplicativo para analisar o clima da UCP')
+st.write('Email : jose.g.oliveira@ufv.br')
 api_key = 'ba581aa976ee412a432b40f8e4cbab62'#Criei um api no site
 url = 'https://api.openweathermap.org/data/2.5/weather?lat=-20.7573491&lon=-42.8728688&appid=ba581aa976ee412a432b40f8e4cbab62&units=metric&lang=pt_br'# API com latitude e longitude de Viçosa
 #site + lat+ long
