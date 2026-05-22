@@ -24,7 +24,7 @@ SHEET_NAME = 'dadosclimaticos2'# Nome da planilha online de dados brutos
 # NOVA FUNÇÃO (para colar no lugar da antiga)
 import json # Garanta que 'import json' está no topo do seu script
 
-@st.cache_resource
+#@st.cache_resource
 def connect_to_sheet():
     """Conecta-se usando o segredo de linha única ou arquivo local."""
     try:
